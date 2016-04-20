@@ -1497,6 +1497,8 @@ def fqdn_ip6():
         return {}
 
     try:
+        if __opts__.get('ipv6_disabled', False):
+            return {}
         info = socket.getaddrinfo(hostname()['fqdn'], None, socket.AF_INET6)
         addrs = list(set(item[4][0] for item in info))
     except socket.error:
